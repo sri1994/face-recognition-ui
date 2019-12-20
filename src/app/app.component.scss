@@ -1,0 +1,54 @@
+body {
+  background-color: #f0f0f0;
+}
+#app {
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+#canvas {
+  display: none;
+}
+li {
+  display: inline;
+  padding: 5px;
+}
+
+#video {
+  border: 20px solid #673ab7;
+  border-radius: 10px;
+}
+
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+  position: sticky;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000;
+}
+
+.flight-icon {
+  color: darkorange;
+  transform: scale(2);
+}
+
+.user-image {
+  cursor: pointer;
+}
+
+.negative-button-selected {
+  background-color: green;
+}
+
+.negative-button-unselected {
+  background-color: #673ab7;
+}
+
+.no-margin {
+  margin: 0px;
+}

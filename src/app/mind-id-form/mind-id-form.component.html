@@ -1,0 +1,9 @@
+<form [formGroup]="midForm">
+  <mat-form-field>
+    <input matInput formControlName="mid" placeholder="Enter MID" type="text" />
+  </mat-form-field>
+  <span>&nbsp;&nbsp;</span>
+  <button mat-raised-button (click)="searchMindWithMid()" color="primary">
+    Search
+  </button>
+</form>

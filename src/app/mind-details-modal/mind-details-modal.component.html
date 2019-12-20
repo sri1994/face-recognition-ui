@@ -1,0 +1,89 @@
+<div>
+  <br />
+  <div class="text-center">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Example home icon"
+      [ngClass]="{
+        icon_3x_success: dialogData?.status === 'success',
+        icon_3x_failure: dialogData?.status === 'failure'
+      }"
+      >{{
+        dialogData?.status === "failure"
+          ? "highlight_off"
+          : "check_circle_outline"
+      }}</mat-icon
+    >
+  </div>
+  <br />
+  <h1
+    class="text-center"
+    *ngIf="dialogData?.status === 'failure'"
+    mat-dialog-title
+  >
+    Sorry! Unable to find a match
+  </h1>
+  <h1
+    class="text-center"
+    *ngIf="dialogData?.status === 'success'"
+    mat-dialog-title
+  >
+    Success!
+  </h1>
+  <div mat-dialog-content>
+    <div
+      class="row"
+      *ngIf="dialogData?.mindDetails && !isShowMidFormComponent"
+      style="background-color: darkorange;"
+    >
+      <div class="col-lg-12 text-center" style="color: #673ab7;">
+        <h3>Issue temporary ID</h3>
+      </div>
+    </div>
+    <br />
+    <div class="row" *ngIf="!dialogData?.mindDetails && isShowMidFormComponent">
+      <div class="col-lg-12 text-center">
+        <app-mind-id-form
+          (mindDetails)="setMindDetails($event)"
+        ></app-mind-id-form>
+      </div>
+    </div>
+    <div class="row" *ngIf="dialogData?.mindDetails && !isShowMidFormComponent">
+      <div class="col-lg-2 col-md-3 mat-body-2 text-right text-label">
+        <span>Name:</span>
+        <br />
+        <span>MID:</span>
+        <br />
+        <span>Phase:</span>
+      </div>
+      <div class="col-lg-4 col-md-3 mat-body-2">
+        <span>{{
+          dialogData?.mindDetails?.name ? dialogData?.mindDetails?.name : "-"
+        }}</span>
+        <br />
+        <span>{{
+          dialogData?.mindDetails?.mid ? dialogData?.mindDetails?.mid : "-"
+        }}</span>
+        <br />
+        <span>{{
+          dialogData?.mindDetails?.phase ? dialogData?.mindDetails?.phase : "-"
+        }}</span>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <img
+          src="{{ dialogData?.mindDetails?.mindImageUrl }}"
+          width="200"
+          height="200"
+          alt="mind image"
+          class="profile-image"
+        />
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="text-center">
+    <button mat-raised-button (click)="onOkClick()" color="primary">
+      Back to Home
+    </button>
+  </div>
+</div>
