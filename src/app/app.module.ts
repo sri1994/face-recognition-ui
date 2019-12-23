@@ -48,7 +48,8 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { MindDetailsModalComponent } from "./mind-details-modal/mind-details-modal.component";
-import { MindIdFormComponent } from './mind-id-form/mind-id-form.component';
+import { MindIdFormComponent } from "./mind-id-form/mind-id-form.component";
+import { DeviceDetectorModule } from "ngx-device-detector";
 
 @NgModule({
   declarations: [AppComponent, MindDetailsModalComponent, MindIdFormComponent],
@@ -101,6 +102,7 @@ import { MindIdFormComponent } from './mind-id-form/mind-id-form.component';
     PortalModule,
     ScrollingModule,
     ReactiveFormsModule,
+    DeviceDetectorModule.forRoot(),
     BrowserAnimationsModule
   ],
   providers: [],

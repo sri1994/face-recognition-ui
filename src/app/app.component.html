@@ -27,8 +27,35 @@
   <div class="col-lg-4 col-md-4"></div>
 </div>
 <div id="app">
+  <!-- <div *ngIf="isSmallScreen">
+    <button
+      mat-raised-button
+      (click)="changeCameraFacing('front')"
+      color="primary"
+      [ngClass]="
+        isCameraFrontFacing
+          ? 'negative-button-selected'
+          : 'negative-button-unselected'
+      "
+    >
+      Front Camera
+    </button>
+    <span>&nbsp;</span>
+    <button
+      mat-raised-button
+      (click)="changeCameraFacing('back')"
+      color="primary"
+      [ngClass]="
+        !isCameraFrontFacing
+          ? 'negative-button-selected'
+          : 'negative-button-unselected'
+      "
+    >
+      Back Camera
+    </button>
+  </div> -->
+  <!-- <br /> -->
   <video #video id="video" width="300" height="230" autoplay></video>
-  <br />
   <br />
   <div>
     <button mat-raised-button (click)="capture()" color="primary">

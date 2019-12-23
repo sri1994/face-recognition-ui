@@ -9,6 +9,8 @@ import {
 import { NgxSpinnerService } from "ngx-spinner";
 import { MindDetailsModalComponent } from "./mind-details-modal/mind-details-modal.component";
 import { MatDialog } from "@angular/material/dialog";
+import { DeviceDetectorService } from "ngx-device-detector";
+declare var Deepai: any;
 
 export interface DialogData {
   type: string;
@@ -39,12 +41,30 @@ export class AppComponent implements OnInit, AfterViewInit {
   public simulateFailureScenario: boolean;
   public sampleDialogData: DialogData;
 
+  public deviceInfo: any;
+  public isMobile: boolean;
+  public isDesktop: boolean;
+  public isTablet: boolean;
+  public isSmallScreen: boolean;
+  public isCameraFrontFacing: boolean;
+
+  public mediaStream: MediaStream;
+
   public constructor(
     private spinner: NgxSpinnerService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private deviceService: DeviceDetectorService
   ) {
     this.captures = [];
     this.simulateFailureScenario = false;
+    this.deviceInfo = this.deviceService.getDeviceInfo();
+    this.isMobile = this.deviceService.isMobile();
+    this.isDesktop = this.deviceService.isDesktop();
+    this.isTablet = this.deviceService.isTablet();
+    console.log(this.deviceInfo, this.isDesktop, this.isTablet, this.isMobile);
+
+    this.isSmallScreen = this.isMobile || this.isTablet ? true : false;
+    this.isCameraFrontFacing = false;
   }
 
   public ngOnInit() {}
@@ -80,7 +100,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         mindDetails: {
           mid: "M1055236",
           name: "Srinivas Prasad H R",
-          mindImageUrl: "https://picsum.photos/id/1/200/200",
+          mindImageUrl: "https://picsum.photos/id/1/70/70",
           phase: "3"
         }
       };
@@ -106,12 +126,41 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
+  public changeCameraFacing(type: string): void {
+    this.video.nativeElement.pause();
+    this.video.nativeElement.srcObject = null;
+    // if (!this.mediaStream) {
+    //   this.mediaStream.
+    //   this.mediaStream.getTracks().forEach(t => {
+    //     t.stop();
+    //   });
+    // }
+    if (type === "front") {
+      this.isCameraFrontFacing = true;
+    } else if (type === "back") {
+      this.isCameraFrontFacing = false;
+    }
+    this.initializeTheWebCam();
+  }
+
   public initializeTheWebCam(): void {
+    const mode: any = "user";
+    // if (this.isSmallScreen && this.isCameraFrontFacing) {
+    //   mode = "user";
+    // } else if (this.isSmallScreen && !this.isCameraFrontFacing) {
+    //   mode = "environment";
+    // } else if (!this.isSmallScreen) {
+    //   mode = "user";
+    // }
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-        this.video.nativeElement.srcObject = stream;
-        this.video.nativeElement.play();
-      });
+      console.log("Mode :", mode);
+      navigator.mediaDevices
+        .getUserMedia({ video: { facingMode: { exact: mode } } })
+        .then(stream => {
+          this.mediaStream = stream;
+          this.video.nativeElement.srcObject = stream;
+          this.video.nativeElement.play();
+        });
     }
   }
 
@@ -120,4 +169,9 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.captures = [];
     this.initializeTheWebCam();
   }
+
+  // public someMethod(): void {
+  //   Deepai.setApiKey('quickstart-QUdJIGlzIGNvbWluZy4uLi4K');
+
+  // }
 }
