@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 export interface DialogData {
   type: string;
   status: string;
+  errorMessage: string;
   mindDetails: {
     mid: string;
     name: string;

@@ -51,6 +51,9 @@ import { MindDetailsModalComponent } from "./mind-details-modal/mind-details-mod
 import { MindIdFormComponent } from "./mind-id-form/mind-id-form.component";
 import { DeviceDetectorModule } from "ngx-device-detector";
 
+import { FileSaverModule } from "ngx-filesaver";
+import { MindServicesService } from "./services/mind-services.service";
+
 @NgModule({
   declarations: [AppComponent, MindDetailsModalComponent, MindIdFormComponent],
   imports: [
@@ -58,6 +61,7 @@ import { DeviceDetectorModule } from "ngx-device-detector";
     AppRoutingModule,
     HttpClientModule,
     NgxSpinnerModule,
+    FileSaverModule,
     FormsModule,
     A11yModule,
     CdkStepperModule,
@@ -105,7 +109,7 @@ import { DeviceDetectorModule } from "ngx-device-detector";
     DeviceDetectorModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [MindServicesService],
   bootstrap: [AppComponent],
   entryComponents: [MindDetailsModalComponent]
 })

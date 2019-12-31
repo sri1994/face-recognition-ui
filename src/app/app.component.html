@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <span>Mind Face</span>
+  <span>MindFace</span>
   <span>&nbsp;</span>
   <span>&nbsp;</span>
   <span>&nbsp;</span>
@@ -55,13 +55,20 @@
     </button>
   </div> -->
   <!-- <br /> -->
-  <video #video id="video" width="300" height="230" autoplay></video>
+  <video
+    #video
+    id="video"
+    width="300"
+    height="230"
+    autoplay
+    playsinline
+  ></video>
   <br />
   <div>
     <button mat-raised-button (click)="capture()" color="primary">
       Capture and verify
     </button>
-    <span>&nbsp;</span>
+    <!-- <span>&nbsp;</span>
     <button mat-raised-button (click)="reset()" color="warn">Reset</button>
     <span>&nbsp;</span>
     <button
@@ -75,7 +82,7 @@
       "
     >
       Negative scenario
-    </button>
+    </button> -->
   </div>
   <canvas #canvas id="canvas" width="300" height="230"></canvas>
   <!-- <ul>
@@ -89,11 +96,15 @@
   </div> -->
 </div>
 
+<!-- rgba(51,51,51,0.8) -->
+
 <ngx-spinner
-  bdColor="rgba(51,51,51,0.8)"
+  bdOpacitiy="0.9"
+  bdColor="#333"
   size="medium"
   color="#fff"
   type="ball-scale-multiple"
+  [fullScreen]="false"
 >
-  <p style="font-size: 40px; color: black">Please wait. Verifying...</p>
+  <p style="font-size: 40px; color: white">Please wait. Verifying...</p>
 </ngx-spinner>

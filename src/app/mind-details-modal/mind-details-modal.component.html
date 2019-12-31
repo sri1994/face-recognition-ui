@@ -18,10 +18,12 @@
   <br />
   <h1
     class="text-center"
-    *ngIf="dialogData?.status === 'failure'"
+    *ngIf="dialogData?.status === 'failure' && dialogData?.errorMessage"
     mat-dialog-title
   >
-    Sorry! Unable to find a match
+    System error; Go back and try again. If error persists, contact help desk.
+    <br />
+    <span class="mat-body-1">{{ dialogData?.errorMessage }}</span>
   </h1>
   <h1
     class="text-center"
@@ -33,7 +35,11 @@
   <div mat-dialog-content>
     <div
       class="row"
-      *ngIf="dialogData?.mindDetails && !isShowMidFormComponent"
+      *ngIf="
+        dialogData?.mindDetails &&
+        !isShowMidFormComponent &&
+        dialogData?.mindDetails?.mid !== 'Not recognized by the system'
+      "
       style="background-color: darkorange;"
     >
       <div class="col-lg-12 text-center" style="color: #673ab7;">
@@ -41,22 +47,38 @@
       </div>
     </div>
     <br />
-    <div class="row" *ngIf="!dialogData?.mindDetails && isShowMidFormComponent">
+    <div
+      class="row"
+      *ngIf="
+        !dialogData?.mindDetails &&
+        isShowMidFormComponent &&
+        dialogData?.errorMessage !== 'Not recognized by the system'
+      "
+    >
       <div class="col-lg-12 text-center">
         <app-mind-id-form
           (mindDetails)="setMindDetails($event)"
         ></app-mind-id-form>
       </div>
     </div>
-    <div class="row" *ngIf="dialogData?.mindDetails && !isShowMidFormComponent">
-      <div class="col-lg-2 col-md-3 mat-body-2 text-right text-label">
+    <div
+      class="row"
+      *ngIf="
+        dialogData?.mindDetails &&
+        !isShowMidFormComponent &&
+        dialogData?.mindDetails?.mid !== 'Not recognized by the system'
+      "
+    >
+      <!-- <div
+        class="col-lg-2 col-md-3 col-sm-3 col-xs-12 mat-body-2 text-right text-label"
+      >
         <span>Name:</span>
         <br />
         <span>MID:</span>
         <br />
         <span>Phase:</span>
       </div>
-      <div class="col-lg-4 col-md-3 mat-body-2">
+      <div class="col-lg-4 col-md-3 col-sm-3 col-xs-12 mat-body-2">
         <span>{{
           dialogData?.mindDetails?.name ? dialogData?.mindDetails?.name : "-"
         }}</span>
@@ -68,8 +90,46 @@
         <span>{{
           dialogData?.mindDetails?.phase ? dialogData?.mindDetails?.phase : "-"
         }}</span>
+      </div> -->
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="row">
+          <div
+            class="col-lg-4 col-md-4 col-sm-4 col-xl-4 mat-body-2 text-label"
+          >
+            <span>Name :</span>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8">
+            <span>{{
+              dialogData?.mindDetails?.name
+                ? dialogData?.mindDetails?.name
+                : "-"
+            }}</span>
+          </div>
+          <div
+            class="col-lg-4 col-md-4 col-sm-4 col-xl-4 mat-body-2 text-label"
+          >
+            <span>MID :</span>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8">
+            <span>{{
+              dialogData?.mindDetails?.mid ? dialogData?.mindDetails?.mid : "-"
+            }}</span>
+          </div>
+          <!-- <div
+            class="col-lg-4 col-md-4 col-sm-4 col-xl-4 mat-body-2 text-label"
+          >
+            <span>Phase :</span>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8">
+            <span>{{
+              dialogData?.mindDetails?.phase
+                ? dialogData?.mindDetails?.phase
+                : "-"
+            }}</span>
+          </div> -->
+        </div>
       </div>
-      <div class="col-lg-6 col-md-6">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <img
           src="{{ dialogData?.mindDetails?.mindImageUrl }}"
           width="200"
