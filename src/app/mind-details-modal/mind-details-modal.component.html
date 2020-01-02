@@ -21,9 +21,19 @@
     *ngIf="dialogData?.status === 'failure' && dialogData?.errorMessage"
     mat-dialog-title
   >
-    System error; Go back and try again. If error persists, contact help desk.
+    <span *ngIf="dialogData?.errorMessage !== 'Not recognized by the system'"
+      >System error; Go back and try again. If error persists, contact help
+      desk.</span
+    >
     <br />
-    <span class="mat-body-1">{{ dialogData?.errorMessage }}</span>
+    <span
+      class="mat-body-1"
+      *ngIf="dialogData?.errorMessage !== 'Not recognized by the system'"
+      >{{ dialogData?.errorMessage }}</span
+    >
+    <h3 *ngIf="dialogData?.errorMessage === 'Not recognized by the system'">
+      Face is not recognised by the system!
+    </h3>
   </h1>
   <h1
     class="text-center"
