@@ -2,7 +2,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [
+      "tracking",
+      "node"
+    ],
+    "resolveJsonModule": true
   },
   "files": [
     "src/main.ts",

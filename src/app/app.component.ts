@@ -5,6 +5,7 @@ import {
   ElementRef,
   AfterViewInit
 } from "@angular/core";
+//const tracking = require('tracking');
 
 import { NgxSpinnerService } from "ngx-spinner";
 import { MindDetailsModalComponent } from "./mind-details-modal/mind-details-modal.component";
@@ -30,7 +31,7 @@ export interface DialogData {
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements AfterViewInit {
   @ViewChild("video", { static: false }) public video: ElementRef;
   @ViewChild("canvas", { static: false }) public canvas: ElementRef;
 
@@ -48,6 +49,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   public simulateFailureScenario: boolean;
   public sampleDialogData: DialogData;
 
+  // public tracking: any;
   public constructor(
     private spinner: NgxSpinnerService,
     private dialog: MatDialog,
@@ -63,18 +65,44 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.isTablet = this.deviceService.isTablet();
     this.isSmallScreen = this.isMobile || this.isTablet ? true : false;
     this.isCameraFrontFacing = false;
+    this.mindServices.getMindsData();
   }
 
-  public ngOnInit() {}
+  // public ngOnInit() {
+  //   this.mindServices.getXlData();
+  // }
 
   public ngAfterViewInit() {
     this.initializeTheWebCam();
   }
 
   public capture() {
+    console.log('INSIDE CAPTURE :', this.mindServices.mindsData);
     this.canvas.nativeElement
       .getContext("2d")
       .drawImage(this.video.nativeElement, 0, 0, 300, 260);
+
+    // ********************************//
+
+    if (!HTMLCanvasElement.prototype.toBlob) {
+      Object.defineProperty(HTMLCanvasElement.prototype, "toBlob", {
+        value: (callback, type, quality) => {
+          setTimeout(() => {
+            const binStr = atob(
+              this.canvas.nativeElement.toDataURL(type, quality).split(",")[1]
+            );
+            const len = binStr.length;
+            const uintArray = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+              uintArray[i] = binStr.charCodeAt(i);
+            }
+            callback(new Blob([uintArray], { type: type || "image/png" }));
+          });
+        }
+      });
+    }
+
+    // *******************************//
     this.canvas.nativeElement.toBlob((blob: Blob) => {
       this.fileSaverService.save(
         blob,
@@ -99,7 +127,7 @@ export class AppComponent implements OnInit, AfterViewInit {
             errorMessage: "",
             mindDetails: {
               mid: imageData && imageData.MID ? imageData.MID : "-",
-              name: imageData && imageData.Name ? imageData.Name : "-",
+              name: imageData && imageData.MID ? this.mindServices.mindsData[imageData.MID.slice(1)] : "-",
               mindImageUrl: sessionStorage.getItem("item1")
             }
           };
@@ -192,6 +220,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     // } else if (!this.isSmallScreen) {
     //   mode = "user";
     // }
+
+    console.log('trackig ;', tracking);
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       console.log("Mode :", mode);
       navigator.mediaDevices
@@ -202,6 +232,43 @@ export class AppComponent implements OnInit, AfterViewInit {
           this.video.nativeElement.play();
         });
     }
+
+    // const context = this.canvas.nativeElement.getContext('2d');
+    // const canvas = document.getElementById('canvas');
+    const context = this.canvas.nativeElement
+      .getContext("2d");
+
+    const tracker = new tracking.ObjectTracker('face');
+    tracker.setInitialScale(4);
+    tracker.setStepSize(2);
+    tracker.setEdgesDensity(0.1);
+
+    tracking.track(document.getElementById('video'), tracker, { camera: true });
+
+    tracker.on('track', (event) => {
+      // console.log('event', event);
+      context.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+      event.data.forEach((rect: any) => {
+        context.strokeStyle = '#8A0051';
+
+        // const gradient = context.createLinearGradient(0, 0, 170, 0);
+        // gradient.addColorStop("0", "magenta");
+        // gradient.addColorStop("0.5", "blue");
+        // gradient.addColorStop("1.0", "red");
+
+        // Fill with gradient
+        // context.strokeStyle = gradient;
+        context.lineWidth = 3;
+        // context.strokeRect(20, 20, 150, 100);
+        context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+        context.font = '11px Helvetica';
+        context.fillStyle = "#fff";
+        context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+        context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+      });
+      // console.log(context);
+    });
+    console.log('tracker :', tracker);
   }
 
   public reset(): void {
@@ -209,11 +276,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.captures = [];
     this.initializeTheWebCam();
   }
-
-  // public someMethod(): void {
-  //   Deepai.setApiKey('quickstart-QUdJIGlzIGNvbWluZy4uLi4K');
-
-  // }
 
   public dataURItoBlob(dataURI: any): Blob {
     console.log("DataURI :", dataURI);

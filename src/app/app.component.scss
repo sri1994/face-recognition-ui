@@ -1,22 +1,52 @@
 body {
   background-color: #f0f0f0;
 }
-#app {
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-#canvas {
-  display: none;
-}
+// #app {
+//   text-align: center;
+//   color: #2c3e50;
+//   margin-top: 2rem;
+// }
+// #canvas {
+//   display: none;
+// }
+
 li {
   display: inline;
   padding: 5px;
 }
 
-#video {
-  // border: 20px solid #673ab7;
-  border-radius: 20px;
+// #video {
+//   border: 2px solid white;
+//   box-shadow: 20px 20px 50px grey; 
+//   left: 40%;
+//   top: 30%;
+//   position: absolute;
+// }
+
+// #canvas {
+//   left: 40%;
+//   top: 30%;
+//   position: absolute;
+// }
+
+.heading {
+  // background-color: #8A0051;
+  // color: white;
+  // border: 2px solid #8A0051;
+  background-image: linear-gradient( rgba(138,0,81,0), rgba(138,0,81,1));
+  color: white;
+  padding-top: 5px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.capture-button {
+  left: 50%;
+  top: 70%;
+  transform: translateX(-50%);
+  position: absolute;
 }
 
 .example-fill-remaining-space {
@@ -26,9 +56,9 @@ li {
 }
 
 .mat-toolbar {
-  position: sticky;
-  position: -webkit-sticky; /* For macOS/iOS Safari */
-  top: 0; /* Sets the sticky toolbar to be on top */
+  position: absolute;
+  position: -webkit-absolute; /* For macOS/iOS Safari */
+  top: 0; /* Sets the absolute toolbar to be on top */
   z-index: 1000;
 }
 
@@ -52,3 +82,54 @@ li {
 .no-margin {
   margin: 0px;
 }
+
+.mat-toolbar.mat-primary {
+ background-color: #c50084;
+ color: white; 
+}
+
+#video {
+  border: 2px solid white;
+  box-shadow: 20px 20px 50px grey; 
+  left: 50%;
+  top: 30%;
+  transform: translateX(-50%);
+  position: absolute;
+}
+
+#canvas {
+  left: 50%;
+  top: 30%;
+  transform: translateX(-50%);
+  position: absolute;
+}
+
+// @media screen and (min-width: 780px) {
+//   .capture-button {
+//     top: 70%;
+//   }
+// }
+
+// @media screen and (min-width: 600px) and (max-width: 779px) {
+//   .capture-button {
+//     top: 70%;
+//   }
+// }
+
+// @media screen and (min-width: 480px) and (max-width: 600px) {
+//   .capture-button {
+//     top: 70%;
+//   }
+// }
+
+// @media screen and (min-width: 350px) and (max-width: 479px) {
+//   .capture-button {
+//     top: 70%
+//   }
+// }
+
+// @media screen and (min-width: 0px) and (max-width: 349px) {
+//   .capture-button {
+//     top: 70%;
+//   }
+// }

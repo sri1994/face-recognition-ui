@@ -4,12 +4,7 @@
   <span>&nbsp;</span>
   <span>&nbsp;</span>
   <span>&nbsp;</span>
-  <mat-icon
-    aria-hidden="false"
-    aria-label="Example home icon"
-    class="flight-icon"
-    >tag_faces</mat-icon
-  >
+  <mat-icon aria-hidden="false" aria-label="Example home icon" class="flight-icon">tag_faces</mat-icon>
 </mat-toolbar>
 
 <br />
@@ -17,14 +12,11 @@
 <br />
 
 <div class="row no-margin">
-  <div class="col-lg-4 col-md-4"></div>
-  <div
-    class="col-lg-4 col-md-4 text-center"
-    style="background-color: darkorange;color: #673ab7;border-radius: 10px;"
-  >
-    <h4>Temporary ID request</h4>
+  <div class="col-lg-2 col-md-2"></div>
+  <div class="col-lg-8 col-md-8 text-center heading">
+    <h4>Let the MindFace recognize you</h4>
   </div>
-  <div class="col-lg-4 col-md-4"></div>
+  <div class="col-lg-2 col-md-2"></div>
 </div>
 <div id="app">
   <!-- <div *ngIf="isSmallScreen">
@@ -55,17 +47,12 @@
     </button>
   </div> -->
   <!-- <br /> -->
-  <video
-    #video
-    id="video"
-    width="300"
-    height="230"
-    autoplay
-    playsinline
-  ></video>
+  <!-- poster="assets/scan.gif" -->
+  <video #video id="video" width="300" height="230" preload autoplay playsinline loop muted></video>
+  <canvas #canvas id="canvas" width="300" height="230"></canvas>
   <br />
   <div>
-    <button mat-raised-button (click)="capture()" color="primary">
+    <button mat-raised-button (click)="capture()" color="primary" class="capture-button">
       Capture and verify
     </button>
     <!-- <span>&nbsp;</span>
@@ -84,7 +71,6 @@
       Negative scenario
     </button> -->
   </div>
-  <canvas #canvas id="canvas" width="300" height="230"></canvas>
   <!-- <ul>
     <li *ngFor="let c of captures">
       <img src="{{ c }}" height="50" />
@@ -98,13 +84,6 @@
 
 <!-- rgba(51,51,51,0.8) -->
 
-<ngx-spinner
-  bdOpacitiy="0.9"
-  bdColor="#333"
-  size="medium"
-  color="#fff"
-  type="ball-scale-multiple"
-  [fullScreen]="false"
->
+<ngx-spinner bdOpacitiy="0.9" bdColor="#333" size="medium" color="#fff" type="ball-scale-multiple" [fullScreen]="false">
   <p style="font-size: 40px; color: white">Please wait. Verifying...</p>
 </ngx-spinner>

@@ -6,7 +6,6 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: aliceblue;
 }
 
 .text-center {
@@ -18,10 +17,33 @@ body {
 }
 
 .text-label {
-  color: #673ab7;
+  color: #8A0051;
 }
 
 .profile-image {
-  border: 2px solid #673ab7;
-  border-radius: 5px;
+  border: 2px solid #8A0051;
+  border-radius: 50%;
+}
+
+.mat-raised-button.mat-primary {
+  color: #8A0051;
+  border: 2px solid #8A0051;
+  background: white;
+}
+
+.mat-raised-button {
+  margin-top: 2rem;
+  border-radius: 0px !important;
+  &:hover {
+    color: white;
+    background-color: #8A0051;
+  }
+}
+
+#msGraph, #msText, #fps {
+  display: none
+}
+
+html{
+  overflow-y: overlay;
 }

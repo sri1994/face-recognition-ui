@@ -1,84 +1,57 @@
 <div>
   <br />
   <div class="text-center">
-    <mat-icon
-      aria-hidden="false"
-      aria-label="Example home icon"
-      [ngClass]="{
+    <mat-icon aria-hidden="false" aria-label="Example home icon" [ngClass]="{
         icon_3x_success: dialogData?.status === 'success',
         icon_3x_failure: dialogData?.status === 'failure'
-      }"
-      >{{
+      }">{{
         dialogData?.status === "failure"
           ? "highlight_off"
           : "check_circle_outline"
-      }}</mat-icon
-    >
+      }}</mat-icon>
   </div>
   <br />
-  <h1
-    class="text-center"
-    *ngIf="dialogData?.status === 'failure' && dialogData?.errorMessage"
-    mat-dialog-title
-  >
-    <span *ngIf="dialogData?.errorMessage !== 'Not recognized by the system'"
-      >System error; Go back and try again. If error persists, contact help
-      desk.</span
-    >
+  <h1 class="text-center text-label" *ngIf="dialogData?.status === 'failure' && dialogData?.errorMessage"
+    mat-dialog-title>
+    <span *ngIf="dialogData?.errorMessage !== 'Not recognized by the system'">System error; Go back and try again. If
+      error persists, contact help
+      desk.</span>
     <br />
-    <span
-      class="mat-body-1"
-      *ngIf="dialogData?.errorMessage !== 'Not recognized by the system'"
-      >{{ dialogData?.errorMessage }}</span
-    >
+    <div style="background-color: #c50084; color: white;">
+      <span class="mat-body-1"
+        *ngIf="dialogData?.errorMessage !== 'Not recognized by the system'">{{ dialogData?.errorMessage }}</span> </div>
     <h3 *ngIf="dialogData?.errorMessage === 'Not recognized by the system'">
       Face is not recognised by the system!
     </h3>
   </h1>
-  <h1
-    class="text-center"
-    *ngIf="dialogData?.status === 'success'"
-    mat-dialog-title
-  >
+  <h1 class="text-center text-label" *ngIf="dialogData?.status === 'success'" mat-dialog-title>
     Success!
   </h1>
   <div mat-dialog-content>
-    <div
-      class="row"
-      *ngIf="
+    <div class="row" *ngIf="
         dialogData?.mindDetails &&
         !isShowMidFormComponent &&
         dialogData?.mindDetails?.mid !== 'Not recognized by the system'
-      "
-      style="background-color: darkorange;"
-    >
-      <div class="col-lg-12 text-center" style="color: #673ab7;">
-        <h3>Issue temporary ID</h3>
+      ">
+      <div class="col-lg-12 text-center" style="color:white; background-color: #8A0051; padding-top: 5px;">
+        <h4>Issue temporary ID</h4>
       </div>
     </div>
     <br />
-    <div
-      class="row"
-      *ngIf="
+    <div class="row" *ngIf="
         !dialogData?.mindDetails &&
         isShowMidFormComponent &&
         dialogData?.errorMessage !== 'Not recognized by the system'
-      "
-    >
+      ">
       <div class="col-lg-12 text-center">
-        <app-mind-id-form
-          (mindDetails)="setMindDetails($event)"
-        ></app-mind-id-form>
+        <app-mind-id-form (mindDetails)="setMindDetails($event)"></app-mind-id-form>
       </div>
     </div>
-    <div
-      class="row"
-      *ngIf="
+    <div class="row" *ngIf="
         dialogData?.mindDetails &&
         !isShowMidFormComponent &&
         dialogData?.mindDetails?.mid !== 'Not recognized by the system'
-      "
-    >
+      ">
       <!-- <div
         class="col-lg-2 col-md-3 col-sm-3 col-xs-12 mat-body-2 text-right text-label"
       >
@@ -103,9 +76,7 @@
       </div> -->
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="row">
-          <div
-            class="col-lg-4 col-md-4 col-sm-4 col-xl-4 mat-body-2 text-label"
-          >
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 mat-body-2 text-label">
             <span>Name :</span>
           </div>
           <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8">
@@ -115,9 +86,7 @@
                 : "-"
             }}</span>
           </div>
-          <div
-            class="col-lg-4 col-md-4 col-sm-4 col-xl-4 mat-body-2 text-label"
-          >
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xl-4 mat-body-2 text-label">
             <span>MID :</span>
           </div>
           <div class="col-lg-8 col-md-8 col-sm-8 col-xl-8">
@@ -140,20 +109,15 @@
         </div>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <img
-          src="{{ dialogData?.mindDetails?.mindImageUrl }}"
-          width="200"
-          height="200"
-          alt="mind image"
-          class="profile-image"
-        />
+        <img src="{{ dialogData?.mindDetails?.mindImageUrl }}" width="200" height="200" alt="mind image"
+          class="profile-image" />
       </div>
     </div>
   </div>
   <br />
   <div class="text-center">
     <button mat-raised-button (click)="onOkClick()" color="primary">
-      Back to Home
+      Home
     </button>
   </div>
 </div>
