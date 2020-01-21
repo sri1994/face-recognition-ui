@@ -38,9 +38,14 @@ export class MindDetailsModalComponent implements OnInit {
   }
 
   public setMindDetails(event: any): void {
-    console.log("event :", event);
+    console.log("setMindDetails event :", event);
     this.isShowMidFormComponent = false;
     this.dialogData.status = "success";
     this.dialogData.mindDetails = event;
+    if (!this.dialogData.mindDetails) {
+      this.dialogData.status = 'failure';
+      this.dialogData.errorMessage = '';
+    }
+    console.log('this.dialogData :', this.dialogData);
   }
 }

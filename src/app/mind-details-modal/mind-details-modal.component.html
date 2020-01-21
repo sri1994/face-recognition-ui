@@ -24,6 +24,9 @@
       Face is not recognised by the system!
     </h3>
   </h1>
+  <h3 class="text-center" *ngIf="!dialogData?.mindDetails && !dialogData?.errorMessage">
+    ID is not found!
+  </h3>
   <h1 class="text-center text-label" *ngIf="dialogData?.status === 'success'" mat-dialog-title>
     Success!
   </h1>
