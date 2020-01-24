@@ -3,7 +3,7 @@
     <input matInput formControlName="mid" placeholder="Enter MID" type="text" />
   </mat-form-field>
   <span>&nbsp;&nbsp;</span>
-  <button mat-raised-button (click)="searchMindWithMid()" color="primary">
+  <button mat-raised-button (click)="searchMindWithMid()" color="primary" [disabled]="midForm.invalid">
     Search
   </button>
 </form>

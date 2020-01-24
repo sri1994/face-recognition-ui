@@ -13,16 +13,24 @@
   <br />
   <h1 class="text-center text-label" *ngIf="dialogData?.status === 'failure' && dialogData?.errorMessage"
     mat-dialog-title>
-    <span *ngIf="dialogData?.errorMessage !== 'Not recognized by the system'">System error; Go back and try again. If
-      error persists, contact help
-      desk.</span>
+    <span *ngIf="dialogData?.errorMessage !== 'Not recognized by the system'">Error!</span>
     <br />
-    <div style="background-color: #c50084; color: white;">
+    <!-- <div style="background-color: #c50084; color: white;">
       <span class="mat-body-1"
-        *ngIf="dialogData?.errorMessage !== 'Not recognized by the system'">{{ dialogData?.errorMessage }}</span> </div>
+        *ngIf="dialogData?.errorMessage !== 'Not recognized by the system'">{{ dialogData?.errorMessage }}</span> </div> -->
+    <h3 *ngIf="dialogData?.errorMessage !== 'Not recognized by the system'">
+      {{ dialogData?.errorMessage?.includes('no faces') ? 'There are no faces in the image!' : 'A problem occured while processing!' }}
+    </h3>
+    <span class="mat-body-2" *ngIf="dialogData?.errorMessage !== 'Not recognized by the system'">Please contact security
+      helpdesk or enter the MID and search below.</span>
+    <span *ngIf="dialogData?.errorMessage === 'Not recognized by the system'">Error!</span>
+    <br *ngIf="dialogData?.errorMessage === 'Not recognized by the system'">
     <h3 *ngIf="dialogData?.errorMessage === 'Not recognized by the system'">
       Face is not recognised by the system!
     </h3>
+    <span class="mat-body-2" *ngIf="dialogData?.errorMessage === 'Not recognized by the system'">
+      Please contact security helpdesk.
+    </span>
   </h1>
   <h3 class="text-center" *ngIf="!dialogData?.mindDetails && !dialogData?.errorMessage">
     ID is not found!

@@ -5,7 +5,6 @@ import {
   ElementRef,
   AfterViewInit
 } from "@angular/core";
-//const tracking = require('tracking');
 
 import { NgxSpinnerService } from "ngx-spinner";
 import { MindDetailsModalComponent } from "./mind-details-modal/mind-details-modal.component";
