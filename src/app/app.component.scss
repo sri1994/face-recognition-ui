@@ -1,6 +1,37 @@
 body {
   background-color: #f0f0f0;
 }
+
+.autom-logo-container {
+  position: absolute;
+  bottom: 2rem;
+  left: 1rem;
+}
+
+.mindtree-logo-container {
+  position: absolute;
+  bottom: 2rem;
+  right: 1rem;
+}
+
+.autom-logo-image {
+  width: 120px;
+  height: 60px;
+  box-shadow: 5px 5px 10px deeppink;
+  border-radius: 10px;
+}
+
+.mindtree-logo-image {
+  width: 150px;
+  height: 60px;
+  box-shadow: -7px 5px 10px deeppink;
+  border-radius: 10px;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  justify-content: center;
+}
 // #app {
 //   text-align: center;
 //   color: #2c3e50;
@@ -17,7 +48,7 @@ li {
 
 // #video {
 //   border: 2px solid white;
-//   box-shadow: 20px 20px 50px grey; 
+//   box-shadow: 20px 20px 50px grey;
 //   left: 40%;
 //   top: 30%;
 //   position: absolute;
@@ -33,7 +64,7 @@ li {
   // background-color: #8A0051;
   // color: white;
   // border: 2px solid #8A0051;
-  background-image: linear-gradient( rgba(138,0,81,0), rgba(138,0,81,1));
+  background-image: linear-gradient(rgba(138, 0, 81, 0), rgba(138, 0, 81, 1));
   color: white;
   padding-top: 5px;
   position: absolute;
@@ -83,14 +114,22 @@ li {
   margin: 0px;
 }
 
+// .mat-toolbar.mat-primary {
+//  background-color: #c50084;
+//  color: white;
+// }
+
 .mat-toolbar.mat-primary {
- background-color: #c50084;
- color: white; 
+  /* background-color: #c50084; */
+  background-color: black;
+  color: white;
+  text-shadow: 2px 2px 5px darkred;
+  background-image: linear-gradient(rgba(138, 0, 81, 0), #8a0051);
 }
 
 #video {
-  border: 2px solid white;
-  box-shadow: 20px 20px 50px grey; 
+  // border: 2px solid white;
+  box-shadow: 20px 20px 50px grey;
   left: 50%;
   top: 30%;
   transform: translateX(-50%);

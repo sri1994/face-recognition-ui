@@ -2,10 +2,17 @@
 html,
 body {
   height: 100%;
-  background-image: url('/assets/mind-gear.gif');
+  background-image: url("/assets/infinite-sphere.gif");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+}
+
+.content {
+  max-width: 60%;
+  margin: auto;
+  // background: white;
+  padding: 20%;
 }
 
 body {
@@ -21,18 +28,75 @@ body {
   text-align: right;
 }
 
+.modal-general-class {
+  background-repeat: no-repeat;
+  background-position-x: center;
+  // background-size: 100px 100px;
+  text-shadow: 2px 2px 5px darkviolet;
+  text-align: center;
+}
+
+.custom-modal-no-face {
+  mat-dialog-container {
+    @extend .modal-general-class;
+    background-image: url("/assets/mr-bean-face.gif");
+    background-size: 180px 180px;
+    //background-attachment: fixed;
+    // background-size: cover;
+  }
+}
+
+.custom-modal-not-mind {
+  mat-dialog-container {
+    @extend .modal-general-class;
+    background-image: url("/assets/pug.jpg");
+    background-size: 250px 250px;
+    //background-attachment: fixed;
+    // background-size: cover;
+  }
+}
+
+.custom-modal-general-error {
+  mat-dialog-container {
+    @extend .modal-general-class;
+    background-image: url("/assets/dog-sleeping.gif");
+    background-size: 250px 250px;
+    //background-attachment: fixed;
+    // background-size: cover;
+  }
+}
+
+.custom-modal-success {
+  mat-dialog-container {
+    @extend .modal-general-class;
+    background-image: url("/assets/minion-happy.gif");
+    //background-attachment: fixed;
+    // background-size: cover;
+  }
+}
+
+.custom-modal-cannot-recognize {
+  mat-dialog-container {
+    @extend .modal-general-class;
+    background-image: url("/assets/minion-sarcastic.gif");
+    background-size: 150px 150px;
+    //background-attachment: fixed;
+    // background-size: cover;
+  }
+}
+
 .text-label {
-  color: #8A0051;
+  color: #8a0051;
 }
 
 .profile-image {
-  border: 2px solid #8A0051;
+  border: 2px solid #8a0051;
   border-radius: 50%;
 }
 
 .mat-raised-button.mat-primary {
-  color: #8A0051;
-  border: 2px solid #8A0051;
+  color: #8a0051;
+  border: 2px solid #8a0051;
   background: white;
 }
 
@@ -41,14 +105,24 @@ body {
   border-radius: 0px !important;
   &:hover {
     color: white;
-    background-color: #8A0051;
+    background-color: #8a0051;
   }
 }
 
-#msGraph, #msText, #fps {
-  display: none
+// .mat-toolbar.mat-primary {
+//   /* background-color: #c50084; */
+//   background-color: black;
+//   color: white;
+//   text-shadow: 2px 2px 5px darkred;
+//   background-image: linear-gradient(rgba(138, 0, 81, 0), #8a0051);
+// }
+
+#msGraph,
+#msText,
+#fps {
+  display: none;
 }
 
-html{
+html {
   overflow-y: overlay;
 }

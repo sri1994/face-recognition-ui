@@ -20,15 +20,23 @@ export interface DialogData {
 })
 export class MindDetailsModalComponent implements OnInit {
   public isShowMidFormComponent: boolean;
+  public isGenerateIdCard: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<MindDetailsModalComponent>,
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData
   ) {
     this.isShowMidFormComponent = false;
+    this.isGenerateIdCard = false;
   }
 
   ngOnInit() {
+    console.log('RSAFSF :', this.dialogData);
+    if (this.dialogData.status === 'generate-id') {
+      this.isGenerateIdCard = true;
+    } else {
+      this.isGenerateIdCard = false;
+    }
     this.isShowMidFormComponent =
       this.dialogData.status === "failure" ? true : false;
   }
@@ -47,5 +55,13 @@ export class MindDetailsModalComponent implements OnInit {
       this.dialogData.errorMessage = '';
     }
     console.log('this.dialogData :', this.dialogData);
+  }
+
+  public onGenerateIdClick(): void {
+    this.dialogRef.close('generate-id');
+  }
+
+  public onPrintClick(): void {
+    window.print();
   }
 }

@@ -149,7 +149,7 @@ export class AppComponent implements AfterViewInit {
           };
         }
         this.spinner.hide();
-        this.openDialog();
+        this.openDialog('failure');
       },
       (error: HttpErrorResponse) => {
         console.log("Error :", error);
@@ -160,7 +160,7 @@ export class AppComponent implements AfterViewInit {
           errorMessage: error.error + "" + error.message
         };
         this.spinner.hide();
-        this.openDialog();
+        this.openDialog('failure');
       }
     );
 
@@ -172,7 +172,7 @@ export class AppComponent implements AfterViewInit {
 
   // "https://picsum.photos/id/1/70/70",
 
-  public openDialog(): void {
+  public openDialog(status: any): void {
     // mindDetails: {
     //   mid: "M1055236",
     //   name: "Srinivas Prasad H R",
@@ -180,16 +180,43 @@ export class AppComponent implements AfterViewInit {
     //   phase: "3"
     // }
 
-    // https://picsum.photos/id/218/300/300
+    // https://picsum.photos/id/218/300/
+
+    let panelClass = '';
+
+    if (status !== 'generate-id') {
+
+      if (this.sampleDialogData.status === 'success') {
+        panelClass = 'custom-modal-success';
+      } else if (this.sampleDialogData.errorMessage !== 'Not recognized by the system') {
+        if (this.sampleDialogData.errorMessage.includes('no face')) {
+          panelClass = 'custom-modal-no-face';
+        } else {
+          panelClass = 'custom-modal-general-error';
+        }
+      } else {
+        panelClass = 'custom-modal-not-mind';
+      }
+
+    } else {
+      panelClass = '';
+      this.sampleDialogData.status = 'generate-id';
+    }
 
     const dialogRef = this.dialog.open(MindDetailsModalComponent, {
       width: "600px",
-      data: this.sampleDialogData
+      data: this.sampleDialogData,
+      panelClass
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      this.captures = [];
-      this.initializeTheWebCam();
+      if (result === 'generate-id') {
+        console.log('RESULT :', result);
+        this.openDialog(result);
+      } else {
+        this.captures = [];
+        this.initializeTheWebCam();
+      }
     });
   }
 
